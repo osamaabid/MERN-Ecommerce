@@ -8,6 +8,7 @@ import productRoutes from "./routes/product.js";
 import cartRoutes from "./routes/cart.js";
 import orderRoutes from "./routes/order.js";
 import authRoutes from "./routes/auth.js";
+import paymentRoutes from "./routes/stripe.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/checkout", paymentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
