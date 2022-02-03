@@ -22,8 +22,8 @@ Router.get("/stats", verifyTokenAndAdmin, getUserStats);
 
 Router.get("/:id", verifyTokenAndAdmin, getUser);
 
-Router.put("/:id", verifyTokenAndAuthorization, updateUser);
+Router.put("/:id", verifyTokenAndAdmin, updateUser);
 
-Router.delete("/:id", verifyTokenAndAuthorization, deleteUser);
+Router.delete("/:id", verifyTokenAndAdmin, deleteUser);
 
 export default Router;
