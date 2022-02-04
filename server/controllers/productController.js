@@ -18,6 +18,7 @@ export const createProduct = async (req, res) => {
 export const getAllProducts = async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
+  console.log(qCategory);
   try {
     let products;
 

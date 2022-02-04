@@ -17,13 +17,15 @@ const Router = express.Router();
 
 Router.get("/test", testProduct);
 
-Router.get("/", verifyTokenAndAdmin, getAllProducts);
+Router.get("/", getAllProducts);
+
+// Router.get("/", verifyTokenAndAdmin, getAllProducts);
 
 Router.get("/stats", verifyTokenAndAdmin, getProductStats);
 
 Router.post("/", verifyTokenAndAdmin, createProduct);
 
-Router.get("/:id", verifyTokenAndAdmin, getProduct);
+Router.get("/:id", getProduct);
 
 Router.put("/:id", verifyTokenAndAdmin, updateProduct);
 

@@ -1,9 +1,11 @@
 import Stripe from "stripe";
 
-const stripePayment = new Stripe(process.env.STRIPE_KEY);
+const stripePayment = new Stripe(
+  "sk_test_51KP1ywGDJGERiuObWFUNajn2VFoOP4A5x1TvGybmgNjDejuvScq3nYVxszWrckqmUSdaAHedVsHbhcOjtgwHCmDH00AWOnhz0p"
+);
 
-export const makePayment = (req, res) => {
-  stripePayment.charges.create(
+export const makePayment = async (req, res) => {
+  await stripePayment.charges.create(
     {
       source: req.body.tokenId,
       amount: req.body.amount,
@@ -11,8 +13,10 @@ export const makePayment = (req, res) => {
     },
     (stripeErr, stripeRes) => {
       if (stripeErr) {
-        res.status(500).json({ msg: err });
+        console.log("Err: ", stripeErr);
+        res.status(500).json({ msg: stripeErr });
       } else {
+        console.log("insucc");
         res.status(200).json(stripeRes);
       }
     }
