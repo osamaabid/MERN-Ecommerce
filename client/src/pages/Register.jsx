@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { registerUser } from "../services/authService";
 
 const Container = styled.div`
   width: 100vw;
@@ -56,6 +59,24 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const res = registerUser(values);
+    navigate("/login");
+  };
   return (
     <Container>
       <Wrapper>
@@ -63,15 +84,24 @@ const Register = () => {
         <Form>
           <Input placeholder="name" />
           <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input
+            name="username"
+            placeholder="username"
+            onChange={handleChange}
+          />
+          <Input name="email" placeholder="email" onChange={handleChange} />
+          <Input
+            name="password"
+            placeholder="password"
+            onChange={handleChange}
+            type="password"
+          />
+          <Input placeholder="confirm password" type="password" />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClick}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>
