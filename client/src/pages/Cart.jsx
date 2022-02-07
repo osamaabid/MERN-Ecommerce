@@ -171,7 +171,7 @@ const Cart = () => {
     const makeRequest = async () => {
       try {
         const res = await makePayment(stripeToken.id, cart.total * 100);
-        history("/success", { state: { stripeData: res, products: cart } });
+        history("/success", { state: { stripeData: res, cart: cart } });
       } catch (err) {
         console.log(err);
       }
