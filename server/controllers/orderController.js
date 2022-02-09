@@ -60,13 +60,20 @@ export const deleteOrder = async (req, res) => {
 
 //Get Monthly Income
 export const getIncome = async (req, res) => {
+  const productId = req.query.pid;
+  console.log(productId);
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(date.setMonth(lastMonth.getMonth() - 1));
 
   try {
     const income = await Order.aggregate([
-      { $match: { createdAt: { $gte: previousMonth } } },
+      {
+        $match: {
+          createdAt: { $gte: previousMonth },
+          ...(productId && { products: { $elemMatch: { productId } } }),
+        },
+      },
       {
         $project: {
           month: { $month: "$createdAt" },
@@ -80,6 +87,7 @@ export const getIncome = async (req, res) => {
         },
       },
     ]);
+    console.log(income);
     res.status(200).json(income);
   } catch (err) {
     res.status(500).json({ msg: err });

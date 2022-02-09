@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
@@ -20,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    img: { type: String },
   },
   { timestamps: true }
 );

@@ -7,18 +7,26 @@ export const testAuth = (req, res) => {
 };
 
 export const registerUser = async (req, res) => {
-  if (!req.body.username || !req.body.email || !req.body.password) {
+  console.log(req.body);
+  if (
+    !req.body.name ||
+    !req.body.username ||
+    !req.body.email ||
+    !req.body.password
+  ) {
     return res
       .status(400)
-      .json({ msg: "Please enter username, email and password" });
+      .json({ msg: "Please enter name, username, email and password" });
   }
   const newUser = new User({
+    name: req.body.name,
     username: req.body.username,
     email: req.body.email,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SEC
     ).toString(),
+    img: req.body.img,
   });
 
   try {
