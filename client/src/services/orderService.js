@@ -3,7 +3,8 @@ import { publicRequest, userRequest } from "../utilities/requestMethod.js";
 import { getToken } from "./tokenService.js";
 
 export const addOrder = async (userId, products, amount, address) => {
-  console.log(getToken());
+  // console.log(getToken());
+  let authToken = getToken();
   try {
     let res = await userRequest.post(
       `/orders`,
@@ -16,7 +17,7 @@ export const addOrder = async (userId, products, amount, address) => {
         amount,
         address,
       },
-      { headers: { token: `Bearer ${getToken()}` } }
+      { headers: { token: `Bearer ${authToken}` } }
     );
     return res.data;
     // console.log(userId, products, amount, address);
