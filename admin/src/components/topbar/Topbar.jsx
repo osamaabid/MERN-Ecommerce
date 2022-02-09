@@ -1,8 +1,16 @@
 import React from "react";
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import {
+  NotificationsNone,
+  Language,
+  Settings,
+  PowerSettingsNewOutlined,
+} from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userRedux";
 
 export default function Topbar() {
+  const dispatch = useDispatch();
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -10,19 +18,19 @@ export default function Topbar() {
           <span className="logo">ShopKart. Admin</span>
         </div>
         <div className="topRight">
-          <div className="topbarIconContainer">
+          {/* <div className="topbarIconContainer">
             <NotificationsNone />
             <span className="topIconBadge">2</span>
-          </div>
-          <div className="topbarIconContainer">
+          </div> */}
+          {/* <div className="topbarIconContainer">
             <Language />
             <span className="topIconBadge">2</span>
-          </div>
+          </div> */}
           <div className="topbarIconContainer">
-            <Settings />
+            <PowerSettingsNewOutlined onClick={() => dispatch(logout())} />
           </div>
           <img
-            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            src="https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"
             alt=""
             className="topAvatar"
           />

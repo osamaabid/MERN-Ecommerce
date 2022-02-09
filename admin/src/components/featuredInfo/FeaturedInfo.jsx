@@ -26,7 +26,7 @@ export default function FeaturedInfo() {
         <span className="featuredTitle">Revenue</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">
-            {income.length > 1
+            {income?.length > 1
               ? "$" + income[1].total
               : "No Previous Month Sales To Compare"}
           </span>

@@ -6,10 +6,18 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import "./user.css";
 
 export default function User() {
+  const params = useParams();
+  const id = params.userId;
+
+  const user = useSelector((state) =>
+    state.user.users.find((user) => user._id === id)
+  );
+
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -22,38 +30,43 @@ export default function User() {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={
+                user.img ||
+                "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png"
+              }
               alt=""
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUsername">{user.name}</span>
+              <span className="userShowUserTitle">
+                {user.isAdmin ? "Admin" : "User"}
+              </span>
             </div>
           </div>
           <div className="userShowBottom">
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{user.username}</span>
             </div>
-            <div className="userShowInfo">
+            {/* <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
               <span className="userShowInfoTitle">10.12.1999</span>
-            </div>
+            </div> */}
             <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
+            {/* <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
               <span className="userShowInfoTitle">+1 123 456 67</span>
-            </div>
+            </div> */}
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">{user.email}</span>
             </div>
-            <div className="userShowInfo">
+            {/* <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
               <span className="userShowInfoTitle">New York | USA</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="userUpdate">
@@ -66,6 +79,7 @@ export default function User() {
                   type="text"
                   placeholder="annabeck99"
                   className="userUpdateInput"
+                  value={user?.username}
                 />
               </div>
               <div className="userUpdateItem">
@@ -74,6 +88,7 @@ export default function User() {
                   type="text"
                   placeholder="Anna Becker"
                   className="userUpdateInput"
+                  value={user?.name}
                 />
               </div>
               <div className="userUpdateItem">
@@ -82,9 +97,10 @@ export default function User() {
                   type="text"
                   placeholder="annabeck99@gmail.com"
                   className="userUpdateInput"
+                  value={user?.email}
                 />
               </div>
-              <div className="userUpdateItem">
+              {/* <div className="userUpdateItem">
                 <label>Phone</label>
                 <input
                   type="text"
@@ -99,15 +115,11 @@ export default function User() {
                   placeholder="New York | USA"
                   className="userUpdateInput"
                 />
-              </div>
+              </div> */}
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                />
+                <img className="userUpdateImg" src={user.img} alt="" />
                 <label htmlFor="file">
                   <Publish className="userUpdateIcon" />
                 </label>

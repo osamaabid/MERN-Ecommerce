@@ -53,6 +53,18 @@ export default function Sidebar() {
                 Products
               </li>
             </Link>
+            <Link to="/newproduct" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Add Products
+              </li>
+            </Link>
+            <Link to="/newUser" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Add Users
+              </li>
+            </Link>
             {/* <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               Transactions
