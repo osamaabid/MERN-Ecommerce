@@ -11,6 +11,7 @@ import { deleteProduct, getProducts } from "../../services/productService.js";
 export default function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  console.log(products);
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
@@ -67,7 +68,7 @@ export default function ProductList() {
         rows={products}
         disableSelectionOnClick
         columns={columns}
-        pageSize={8}
+        pageSize={10}
         getRowId={(row) => row._id}
         checkboxSelection
       />
